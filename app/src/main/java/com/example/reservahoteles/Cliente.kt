@@ -22,14 +22,14 @@ class Cliente {
         set(value) {
             field = value
         }
-    var historial_reserva:LongArray
+    var historial_reserva:MutableList<Long>
         get() {
             return field
         }
         set(value) {
             field = value
         }
-    constructor(cedula:Long, nombre:String, metodo_pago:String, historial:LongArray) {
+    constructor(cedula:Long, nombre:String, metodo_pago:String, historial:MutableList<Long>) {
         this.cedula = cedula
         this.nombre = nombre
         this.metodo_pago = metodo_pago
@@ -58,10 +58,8 @@ class Cliente {
             println("Introduzca un metodo de pago valido")
             crear_cliente()
         }
-        fun LongArray(): LongArray {
-            return TODO("Provide the return value")
-        }
-        this.historial_reserva = LongArray()
+        var mutableList: MutableList<Long> = mutableListOf()
+        this.historial_reserva = mutableList
     }
     fun modificar_cliente() {
         println("Seleccione el dato que desea modificar:")
@@ -106,19 +104,34 @@ class Cliente {
     fun agregar_reserva() {
         println("Introduzca el numero de reserva que desea agregar al historial del cliente:")
         var numero_reserva = readLine()!!.toLong()
-        this.historial_reserva += numero_reserva
+        this.historial_reserva.add(numero_reserva)
     }
     fun eliminar_reserva() {
         println("Introduzca el numero de reserva que desea eliminar del historial del cliente:")
         var numero_reserva = readLine()!!.toLong()
-        for (i in this.historial_reserva.indices) {
-            if (this.historial_reserva[i] == numero_reserva) {
-                var indice = i
-                val lista = this.historial_reserva.toMutableList()
-                lista.removeAt(indice)
-                this.historial_reserva = lista.toLongArray()
-            }
-        }
+        this.historial_reserva.remove(numero_reserva)
         println("Se ha eliminado la reserva: " + numero_reserva + " del historial del cliente")
     }
+
+    fun ver_informacion_cliente() {
+        println("Nombre:")
+        println(this.nombre)
+        println("Cedula:")
+        println(this.cedula)
+        println("Metodo de pago:")
+        println(this.metodo_pago)
+        println("Historial de reserva:")
+        println(this.historial_reserva)
+    }
 }
+
+fun main() {
+    val historial_reserva:MutableList<Long> = mutableListOf()
+    val cliente1=Cliente(0,"","", historial_reserva)
+    cliente1.crear_cliente()
+    cliente1.agregar_reserva()
+    cliente1.agregar_reserva()
+    cliente1.eliminar_reserva()
+    cliente1.ver_informacion_cliente()
+}
+
