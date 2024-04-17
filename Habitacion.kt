@@ -14,7 +14,7 @@ class Habitacion{
                 disponibleHabitacion: Boolean = true){
         this.numHabitacion = numHabitacion
         this.camasHabitacion = camasHabitacion
-        this.precioHabitacion = this.calcularPrecioHabitacion()
+        this.precioHabitacion = precioHabitacion
         this.disponibleHabitacion = disponibleHabitacion
     }
 
