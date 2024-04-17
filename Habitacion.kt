@@ -27,7 +27,7 @@ class Habitacion{
     fun removeCamaHabitacion(cama: Cama){this.camasHabitacion.remove(cama)}
 
     fun getPrecioHabitacion():Double{return this.precioHabitacion}
-    fun setPrecioHabitacion(){this.precioHabitacion = this.calcularPrecioHabitacion()}
+    fun setPrecioHabitacion(precio:Int){this.precioHabitacion = precio}
     fun calcularPrecioHabitacion(): Double {
         var precio: Double = 0.0
         for (i in camasHabitacion) precio += when (i) {
