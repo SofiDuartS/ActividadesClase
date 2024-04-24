@@ -1,5 +1,5 @@
 package com.example.reservahoteles
-
+import com.example.reservahoteles.Reserva
 class Cliente {
     var cedula:Long
         get() {
@@ -22,14 +22,14 @@ class Cliente {
         set(value) {
             field = value
         }
-    var historial_reserva:MutableList<Long>
+    var historial_reserva:MutableList<Reserva>
         get() {
             return field
         }
         set(value) {
             field = value
         }
-    constructor(cedula:Long, nombre:String, metodo_pago:String, historial:MutableList<Long>) {
+    constructor(cedula:Long, nombre:String, metodo_pago:String, historial:MutableList<Reserva>) {
         this.cedula = cedula
         this.nombre = nombre
         this.metodo_pago = metodo_pago
@@ -58,7 +58,7 @@ class Cliente {
             println("Introduzca un metodo de pago valido")
             crear_cliente()
         }
-        var mutableList: MutableList<Long> = mutableListOf()
+        var mutableList: MutableList<Reserva> = mutableListOf()
         this.historial_reserva = mutableList
     }
     fun modificar_cliente() {
@@ -101,16 +101,13 @@ class Cliente {
         }
 
     }
-    fun agregar_reserva() {
-        println("Introduzca el numero de reserva que desea agregar al historial del cliente:")
-        var numero_reserva = readLine()!!.toLong()
-        this.historial_reserva.add(numero_reserva)
+    fun agregar_reserva(Reserva: Reserva) {
+        this.historial_reserva.add(Reserva)
+        println("Se ha agregado la reserva: " + Reserva.id_reserva + " al historial del cliente")
     }
-    fun eliminar_reserva() {
-        println("Introduzca el numero de reserva que desea eliminar del historial del cliente:")
-        var numero_reserva = readLine()!!.toLong()
-        this.historial_reserva.remove(numero_reserva)
-        println("Se ha eliminado la reserva: " + numero_reserva + " del historial del cliente")
+    fun eliminar_reserva(Reserva: Reserva) {
+        this.historial_reserva.remove(Reserva)
+        println("Se ha eliminado la reserva: " + Reserva.id_reserva + " del historial del cliente")
     }
 
     fun ver_informacion_cliente() {
@@ -125,13 +122,4 @@ class Cliente {
     }
 }
 
-fun main() {
-    val historial_reserva:MutableList<Long> = mutableListOf()
-    val cliente1=Cliente(0,"","", historial_reserva)
-    cliente1.crear_cliente()
-    cliente1.agregar_reserva()
-    cliente1.agregar_reserva()
-    cliente1.eliminar_reserva()
-    cliente1.ver_informacion_cliente()
-}
 
